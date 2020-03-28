@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:scorch/home.dart';
 
 void main() {
-  runApp(TabBarDemo());
+  runApp(MyApp());
 }
 
-class TabBarDemo extends StatelessWidget {
+class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DefaultTabController(
+        initialIndex: 1,
         length: 3,
         child: Scaffold(
           appBar: AppBar(
@@ -22,29 +25,8 @@ class TabBarDemo extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
-              Scaffold(
-                body: (
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Center(
-                          child: CircleAvatar(
-                            backgroundImage: AssetImage('assets/Baby Inuyasha.jpg'),
-                            radius: 80,
-                            backgroundColor: Colors.red,
-                            child:
-                            Text(
-                                'Scorch',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 30,),
-                      ],
-                    )
-                ),
-              ),
               Icon(Icons.directions_transit),
+              HomePage(),
               Icon(Icons.directions_bike),
             ],
           ),
