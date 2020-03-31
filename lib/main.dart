@@ -14,13 +14,17 @@ class MyApp extends StatelessWidget {
         initialIndex: 1,
         length: 3,
         child: Scaffold(
-          appBar: AppBar(
-            bottom: TabBar(
-              tabs: [
-                Tab(icon: Icon(Icons.portrait)),
-                Tab(icon: Icon(Icons.playlist_add_check)),
-                Tab(icon: Icon(Icons.notifications)),
-              ],
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(50.0),
+            child: AppBar(
+              backgroundColor: Colors.black,
+              bottom: TabBar(
+                tabs: [
+                  Tab(icon: Icon(Icons.portrait)),
+                  Tab(icon: Icon(Icons.playlist_add_check)),
+                  Tab(icon: Icon(Icons.notifications)),
+                ],
+              ),
             ),
           ),
           body: TabBarView(
