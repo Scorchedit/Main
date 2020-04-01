@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:scorch/home.dart';
+import 'package:scorch/landing.dart';
+import 'package:scorch/notification.dart';
+import 'package:scorch/settings.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,9 +31,9 @@ class MyApp extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
-              Icon(Icons.directions_transit),
-              HomePage(),
-              Icon(Icons.directions_bike),
+              SettingsPage(),
+              LandingPage(),
+              NotificationsPage(),
             ],
           ),
         ),
