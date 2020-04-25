@@ -1,0 +1,12 @@
+class LocationService {
+  Future GetLocation() async {
+    var prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString('token');
+    Map<String, String> headers = {
+      "content-type": "application/json",
+      'Authorization':'bearer $token'
+    };
+    // make POST request
+    return await post('$url/scorch', headers: headers, body: body);
+  }
+}

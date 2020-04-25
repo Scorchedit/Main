@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:scorch/searchSettings.dart';
+
+import 'Services/AccountService.dart';
+import 'login.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -7,7 +11,16 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-
+  void initState() {
+    AccountService.checkIfAuthenticated().then((success){
+      if (!success) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => LoginPage()));
+      }
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,8 +52,15 @@ class _SettingsPageState extends State<SettingsPage> {
                     margin: const EdgeInsets.fromLTRB(25, 0, 0, 0),
                     child: Column(
                       children: <Widget>[
-                        Icon(Icons.settings, color: Colors.white, size: 130,),
-                        Text('Profile', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold))
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => SearchSettingsPage()));
+                          },
+                          child: Icon(Icons.settings, color: Colors.white, size: 130,),
+                        ),
+                        Text('Search', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold))
                       ],
                     ),
                   ),
@@ -49,7 +69,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     child: Column(
                       children: <Widget>[
                         Icon(Icons.group, color: Colors.white, size: 130,),
-                        Text('Profile', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold))
+                        Text('Friends', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold))
                       ],
                     ),
                   )

@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'Services/AccountService.dart';
+import 'login.dart';
+
 final List<String> rowList = ['Aandklas', 'Baraccas', 'Elephants and Friends', 'Madison\'s avenue',
   'Rock@88', 'Salsa Mexican', 'Aandklas', 'Baraccas', 'Elephants and Friends', 'Madison\'s avenue',
   'Rock@88', 'Salsa Mexican', 'Aandklas', 'Baraccas', 'Elephants and Friends', 'Madison\'s avenue'];
@@ -12,6 +15,16 @@ class NotificationsPage extends StatefulWidget {
 
 class _NotificationsState extends State<NotificationsPage> {
   @override
+  void initState() {
+    AccountService.checkIfAuthenticated().then((success){
+      if (!success) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => LoginPage()));
+      }
+    });
+    super.initState();
+  }
   Widget build(BuildContext context) {
     BoxDecoration myBoxDecoration() {
       return BoxDecoration(

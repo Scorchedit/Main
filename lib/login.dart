@@ -1,11 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:scorch/Services/AccountService.dart';
 import 'package:scorch/home.dart';
 import 'Widgets/SocialIcons.dart';
 import 'CustomIcons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'Services/AccountService.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -51,19 +52,12 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     _makePostLogin() async {
-      String url = 'http://192.168.0.201/ScorchApi/token';
-      Map<String, String> headers = {};
-      Map<String, String> body = {
-        "grant_type": "password",
-        "username": usernameController.text,
-        "password": passwordController.text
-      };
-      // make POST request
-      Response response = await post(url, headers: headers, body: body);
+//      var response = await AccountService.makePostLogin(usernameController.text, passwordController.text);
+      var response = await AccountService.makePostLogin('eddypretorius@gmail.com', 'P@ssw0rd');
       if(response.statusCode == 200) {
-        Map<String, dynamic> responsBody = jsonDecode(response.body);
+        Map<String, dynamic> responseBody = jsonDecode(response.body);
         var prefs = await SharedPreferences.getInstance();
-        await prefs.setString('token', responsBody['access_token']);
+        await prefs.setString('token', responseBody['access_token']);
         Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => HomePage()));
